@@ -10,9 +10,9 @@
 
 @implementation Announce_API
 
-+ (NSString *)getAnnounceInfo_Count:(NSInteger)count andType:(NSString *)type andStartDay:(NSInteger) startDay {
-    NSString *url = [NSString stringWithFormat:@"dtop.ntou.edu.tw/app1020131.php?count=%@&CLASS=%@&StartDate=%@",count ,type,startDay ];
-      url = [url stringByAddingPercentEscapesUsingEncoding:CFStringConvertEncodingToNSStringEncoding(NSASCIIStringEncoding)];
++ (NSDictionary *)getAnnounceInfo_Count:(int)count andType:(NSString *)type andPage:(int) page {
+    NSString *url = [NSString stringWithFormat:@"http://dtop.ntou.edu.tw/app1020311.php?page=%d&count=%d&class=%@",page,count,type];
+      url = [url stringByAddingPercentEscapesUsingEncoding:CFStringConvertEncodingToNSStringEncoding(NSUTF8StringEncoding)];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
     [request setHTTPMethod:@"GET"];
     [request setURL:[NSURL URLWithString:url]];
@@ -26,8 +26,13 @@
         NSLog(@"Error getting %@, HTTP status code %i", url, [responseCode statusCode]);
         return nil;
     }
+    NSError * parseError;
     
-    return [[NSString alloc] initWithData:oResponseData encoding:NSUTF8StringEncoding];
+    NSString * XMLResponse = [[NSString alloc] initWithData:oResponseData encoding:NSUTF8StringEncoding];
+   return [XMLReader dictionaryForXMLString:XMLResponse error:&parseError];
+   
+    
+    // return [[NSString alloc] initWithData:oResponseData encoding:NSUTF8StringEncoding];
 }
 
 

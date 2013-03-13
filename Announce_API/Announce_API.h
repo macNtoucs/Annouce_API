@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-
+#import "XMLReader.h"
 @interface Announce_API : NSObject
 
 
@@ -20,5 +20,5 @@
  
  EX : getAnnounceInfo_Count:@"3" andType:@"藝文活動" andStartDay:@20130211 ;
  */
-+ (NSString *)getAnnounceInfo_Count:(NSInteger)count andType:(NSString *)type andStartDay:(NSInteger) startDay ;
++ (NSString *)getAnnounceInfo_Count:(NSInteger)count andType:(NSString *)type andPage:(NSInteger) page ;
 @end

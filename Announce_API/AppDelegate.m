@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "Announce_API.h"
+#import "XMLReader.h"
 @implementation AppDelegate
 
 - (void)dealloc
@@ -22,7 +23,16 @@
     // Override point for customization after application launch.
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
-   NSString* response= [Announce_API getAnnounceInfo_Count:@"5" andType:@"藝文活動" andStartDay:@"20130221"];
+        // Parse the XML into a dictionary
+    NSError *parseError = nil;
+   /* NSDictionary *xmlDictionary = [XMLReader dictionaryForXMLString:testXMLString error:&parseError];
+    // Print the dictionary
+    NSLog(@"%@", xmlDictionary);*/
+    
+    
+    
+   NSDictionary* response= [Announce_API getAnnounceInfo_Count:5 andType:@"art" andPage:1];
+    NSLog(@"%@",response);
     return YES;
 }
 

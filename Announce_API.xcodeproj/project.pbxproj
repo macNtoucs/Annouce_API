@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		91756E5F16F06F4D001D724D /* XMLReader.m in Sources */ = {isa = PBXBuildFile; fileRef = 91756E5E16F06F4D001D724D /* XMLReader.m */; };
 		91B98D4016D337CB00992D6F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 91B98D3F16D337CB00992D6F /* UIKit.framework */; };
 		91B98D4216D337CB00992D6F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 91B98D4116D337CB00992D6F /* Foundation.framework */; };
 		91B98D4416D337CB00992D6F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 91B98D4316D337CB00992D6F /* CoreGraphics.framework */; };
@@ -20,6 +21,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		91756E5D16F06F4D001D724D /* XMLReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMLReader.h; sourceTree = "<group>"; };
+		91756E5E16F06F4D001D724D /* XMLReader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMLReader.m; sourceTree = "<group>"; };
 		91B98D3B16D337CB00992D6F /* Announce_API.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Announce_API.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		91B98D3F16D337CB00992D6F /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		91B98D4116D337CB00992D6F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -83,6 +86,8 @@
 			children = (
 				91B98D4E16D337CB00992D6F /* AppDelegate.h */,
 				91B98D4F16D337CB00992D6F /* AppDelegate.m */,
+				91756E5D16F06F4D001D724D /* XMLReader.h */,
+				91756E5E16F06F4D001D724D /* XMLReader.m */,
 				91B98D4616D337CB00992D6F /* Supporting Files */,
 				91B98D5C16D3381D00992D6F /* Announce_API.h */,
 				91B98D5D16D3381D00992D6F /* Announce_API.m */,
@@ -172,6 +177,7 @@
 				91B98D4C16D337CB00992D6F /* main.m in Sources */,
 				91B98D5016D337CB00992D6F /* AppDelegate.m in Sources */,
 				91B98D5E16D3381D00992D6F /* Announce_API.m in Sources */,
+				91756E5F16F06F4D001D724D /* XMLReader.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -278,6 +284,7 @@
 				91B98D5B16D337CB00992D6F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
