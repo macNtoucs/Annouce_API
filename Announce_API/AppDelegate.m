@@ -24,14 +24,14 @@
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
         // Parse the XML into a dictionary
-    NSError *parseError = nil;
+    //NSError *parseError = nil;
    /* NSDictionary *xmlDictionary = [XMLReader dictionaryForXMLString:testXMLString error:&parseError];
     // Print the dictionary
     NSLog(@"%@", xmlDictionary);*/
+    Announce_API *api = [[Announce_API alloc]init];
     
     
-    
-   NSDictionary* response= [Announce_API getAnnounceInfo_Count:5 andType:@"art" andPage:1];
+   NSDictionary* response= [api getAnnounceInfo_Count:5 andType:@"art" andPage:1];
     NSLog(@"%@",response);
     return YES;
 }

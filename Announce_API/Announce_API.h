@@ -8,9 +8,13 @@
 
 #import <Foundation/Foundation.h>
 #import "XMLReader.h"
-@interface Announce_API : NSObject
-
-
+@interface Announce_API : NSObject <NSURLConnectionDelegate >{
+    int mFileSize;
+    int currentRieceved;
+    NSMutableData * updatePackage;
+}
+//@property (nonatomic,retain)  NSString * Myfilenmame;
+//@property (nonatomic,retain)  NSString * Myfilelength;
 /*
  取得公佈欄資料
  參數：
@@ -26,5 +30,6 @@
  
  EX : NSDictionary* response= [Announce_API getAnnounceInfo_Count:5 andType:@"art" andPage:1];
  */
-+ (NSDictionary *)getAnnounceInfo_Count:(NSInteger)count andType:(NSString *)type andPage:(NSInteger) page ;
+- (NSDictionary *)getAnnounceInfo_Count:(NSInteger)count andType:(NSString *)type andPage:(NSInteger) page ;
+
 @end
