@@ -26,5 +26,5 @@
  
  EX : NSDictionary* response= [Announce_API getAnnounceInfo_Count:5 andType:@"art" andPage:1];
  */
-+ (NSString *)getAnnounceInfo_Count:(NSInteger)count andType:(NSString *)type andPage:(NSInteger) page ;
++ (NSDictionary *)getAnnounceInfo_Count:(NSInteger)count andType:(NSString *)type andPage:(NSInteger) page ;
 @end
