@@ -14,11 +14,17 @@
 /*
  取得公佈欄資料
  參數：
-     count : 要求的數量
-     type : 類型{   學校公告, 校外訊息, 藝文活動  }
-     day: 起始日期，格式為20130211
+    (int) count : 要求的數量
+    (NSString) type : 類型{   , 共有以下 6 種類型
+            a.) announce (學校公告)
+            b.) symposium (研討會)
+            c.) art (藝文活動)
+            d.) lecture  (演講公告)
+            e.) document (電子公文)
+            f.) Information (校外訊息)  }
+    (int)page: 頁數
  
- EX : getAnnounceInfo_Count:@"3" andType:@"藝文活動" andStartDay:@20130211 ;
+ EX : NSDictionary* response= [Announce_API getAnnounceInfo_Count:5 andType:@"art" andPage:1];
  */
 + (NSString *)getAnnounceInfo_Count:(NSInteger)count andType:(NSString *)type andPage:(NSInteger) page ;
 @end
