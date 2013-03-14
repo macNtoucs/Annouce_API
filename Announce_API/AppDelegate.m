@@ -29,10 +29,8 @@
     // Print the dictionary
     NSLog(@"%@", xmlDictionary);*/
     Announce_API *api = [[Announce_API alloc]init];
-    
-    
-   NSDictionary* response= [api getAnnounceInfo_Count:5 andType:@"art" andPage:1];
-    //NSLog(@"%@",response);
+   [api getAnnounceInfo_Count:5 andType:@"art" andPage:1];
+    NSLog(@"%@",api.content);
     return YES;
 }
 

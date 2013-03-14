@@ -10,6 +10,7 @@
 
 @implementation Announce_API
 @synthesize delegate;
+@synthesize content;
 - (id) init {
     self = [super init];
     if (self != nil) {
@@ -19,7 +20,7 @@
 }
 
 
-- (NSDictionary *)getAnnounceInfo_Count:(int)count andType:(NSString *)type andPage:(int) page {
+- (void)getAnnounceInfo_Count:(int)count andType:(NSString *)type andPage:(int) page {
     NSString *url = [NSString stringWithFormat:@"http://dtop.ntou.edu.tw/app1020311.php?page=%d&count=%d&class=%@",page,count,type];
     url = [url stringByAddingPercentEscapesUsingEncoding:CFStringConvertEncodingToNSStringEncoding(NSUTF8StringEncoding)];
     updatePackage = [[NSMutableData alloc] init];
@@ -29,11 +30,12 @@
  							 cachePolicy: NSURLRequestReloadIgnoringLocalCacheData
  							 timeoutInterval: 10
  							 ];
-    
-    NSURLConnection *connection = [[NSURLConnection alloc]
+    dispatch_sync(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^ {
+    connection = [[NSURLConnection alloc]
  								   initWithRequest:request
  								   delegate:self
  								   startImmediately:YES];
+    
  	if(!connection) {
  		NSLog(@"connection failed");
         [delegate parser:self didFailWithDownloadError:error];
@@ -44,12 +46,12 @@
  	[delegate parserDidStartParsing:self];
  	[connection release];
     [request release];
-    
-    NSError * parseError;
-    
-    NSString * XMLResponse = [[NSString alloc] initWithData:updatePackage encoding:NSUTF8StringEncoding];
-    //[connection cancel];
-   return [XMLReader dictionaryForXMLString:XMLResponse error:&parseError];
+    });
+   // NSError * parseError;
+    //NSString * XMLResponse = [[NSString alloc] initWithData:updatePackage encoding:NSUTF8StringEncoding];
+    //return [XMLReader dictionaryForXMLString:XMLResponse error:&parseError];
+  
+   
 }
 
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
@@ -72,10 +74,15 @@
     float t2= mFileSize/1024;
     NSString *output = [NSString stringWithFormat:@"正在下载 進度:%.2fk/%.2fk .",t,t2];
     [delegate parser:self didMakeProgress:t/t2 ];
-    if (t/t2>=1.0) [delegate parserDidFinishParsing:self];
     NSLog(@"%@",output);
 }
 
+- (void)connectionDidFinishLoading:(NSURLConnection *)connection {
+    [delegate parserDidFinishParsing:self];
+}
 
-
+-(void)CancelConnection{
+    [connection cancel];
+    
+}
 @end

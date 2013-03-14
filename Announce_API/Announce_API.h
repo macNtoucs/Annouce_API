@@ -24,10 +24,12 @@
     int currentRieceved;
     NSMutableData * updatePackage;
     NSDictionary *content;
+    NSURLConnection *connection;
 }
 //@property (nonatomic,retain)  NSString * Myfilenmame;
 //@property (nonatomic,retain)  NSString * Myfilelength;
 @property (assign) id delegate;
+@property (retain,nonatomic) NSDictionary* content;
 /*
  取得公佈欄資料
  參數：
@@ -43,6 +45,6 @@
  
  EX : NSDictionary* response= [Announce_API getAnnounceInfo_Count:5 andType:@"art" andPage:1];
  */
-- (NSDictionary *)getAnnounceInfo_Count:(NSInteger)count andType:(NSString *)type andPage:(NSInteger) page ;
-
+- (void)getAnnounceInfo_Count:(NSInteger)count andType:(NSString *)type andPage:(NSInteger) page ;
+-(void)CancelConnection;
 @end
