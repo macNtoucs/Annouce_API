@@ -5,6 +5,17 @@
 //  Created by R MAC on 13/2/19.
 //  Copyright (c) 2013年 R MAC. All rights reserved.
 //
+@class Announce_API;
+@protocol Announce_API_Delegate <NSObject>
+@required
+- (void)parserDidStartDownloading:(Announce_API *)parser;
+- (void)parserDidStartParsing:(Announce_API *)parser;
+- (void)parser:(Announce_API *)parser didMakeProgress:(CGFloat)percentDone;
+- (void)parser:(Announce_API *)parser didFailWithDownloadError:(NSError *)error;
+- (void)parser:(Announce_API *)parser didFailWithParseError:(NSError *)error;
+- (void)parserDidFinishParsing:(Announce_API *)parser;
+
+@end
 
 #import <Foundation/Foundation.h>
 #import "XMLReader.h"
