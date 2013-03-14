@@ -70,7 +70,7 @@
 
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data{
     [updatePackage appendData:data];
-    float t = [data length]/1024;
+    float t = [updatePackage length]/1024;
     float t2= mFileSize/1024;
     NSString *output = [NSString stringWithFormat:@"正在下载 進度:%.2fk/%.2fk .",t,t2];
     [delegate parser:self didMakeProgress:t/t2 ];
