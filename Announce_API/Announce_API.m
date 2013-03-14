@@ -15,6 +15,7 @@
     self = [super init];
     if (self != nil) {
         updatePackage = [NSMutableData new];
+        
     }
     return self;
 }
@@ -31,6 +32,7 @@
  							 timeoutInterval: 10
  							 ];
     dispatch_sync(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^ {
+        isConnected = true;
     connection = [[NSURLConnection alloc]
  								   initWithRequest:request
  								   delegate:self
@@ -63,7 +65,9 @@
     }
 }
 
-- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error{
+- (void)connection:(NSURLConnection *)_connection didFailWithError:(NSError *)error{
+    isConnected = false;
+    [connection cancel];
     [delegate parser:self didFailWithDownloadError:error];
     NSLog(@"HTTP DownloadError");
 }
@@ -85,7 +89,10 @@
 }
 
 -(void)CancelConnection{
-    [connection cancel];
-    
+    if(isConnected){
+        isConnected = false;
+        [connection cancel];
+    }
+    else return;
 }
 @end

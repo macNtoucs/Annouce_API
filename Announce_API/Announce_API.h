@@ -25,6 +25,7 @@
     NSMutableData * updatePackage;
     NSDictionary *content;
     NSURLConnection *connection;
+    BOOL isConnected;
 }
 //@property (nonatomic,retain)  NSString * Myfilenmame;
 //@property (nonatomic,retain)  NSString * Myfilelength;

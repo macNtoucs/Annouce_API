@@ -30,6 +30,7 @@
     NSLog(@"%@", xmlDictionary);*/
     Announce_API *api = [[Announce_API alloc]init];
    [api getAnnounceInfo_Count:5 andType:@"art" andPage:1];
+   // [api CancelConnection];
     NSLog(@"%@",api.content);
     return YES;
 }
