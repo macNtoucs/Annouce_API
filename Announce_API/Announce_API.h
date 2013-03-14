@@ -14,18 +14,20 @@
 - (void)parser:(Announce_API *)parser didFailWithDownloadError:(NSError *)error;
 - (void)parser:(Announce_API *)parser didFailWithParseError:(NSError *)error;
 - (void)parserDidFinishParsing:(Announce_API *)parser;
-
 @end
 
 #import <Foundation/Foundation.h>
 #import "XMLReader.h"
 @interface Announce_API : NSObject <NSURLConnectionDelegate >{
+    id delegate;
     int mFileSize;
     int currentRieceved;
     NSMutableData * updatePackage;
+    NSDictionary *content;
 }
 //@property (nonatomic,retain)  NSString * Myfilenmame;
 //@property (nonatomic,retain)  NSString * Myfilelength;
+@property (assign) id delegate;
 /*
  取得公佈欄資料
  參數：

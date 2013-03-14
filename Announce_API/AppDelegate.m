@@ -32,7 +32,7 @@
     
     
    NSDictionary* response= [api getAnnounceInfo_Count:5 andType:@"art" andPage:1];
-    NSLog(@"%@",response);
+    //NSLog(@"%@",response);
     return YES;
 }
 

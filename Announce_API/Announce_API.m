@@ -9,7 +9,7 @@
 #import "Announce_API.h"
 
 @implementation Announce_API
-
+@synthesize delegate;
 - (id) init {
     self = [super init];
     if (self != nil) {
@@ -21,35 +21,39 @@
 
 - (NSDictionary *)getAnnounceInfo_Count:(int)count andType:(NSString *)type andPage:(int) page {
     NSString *url = [NSString stringWithFormat:@"http://dtop.ntou.edu.tw/app1020311.php?page=%d&count=%d&class=%@",page,count,type];
-      url = [url stringByAddingPercentEscapesUsingEncoding:CFStringConvertEncodingToNSStringEncoding(NSUTF8StringEncoding)];
-    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
-    [request setHTTPMethod:@"GET"];
-    [request setURL:[NSURL URLWithString:url]];
+    url = [url stringByAddingPercentEscapesUsingEncoding:CFStringConvertEncodingToNSStringEncoding(NSUTF8StringEncoding)];
+    updatePackage = [[NSMutableData alloc] init];
+ 	NSError * error = nil;
+    NSURLRequest *request = [[NSURLRequest alloc]
+ 							 initWithURL: [NSURL URLWithString:url]
+ 							 cachePolicy: NSURLRequestReloadIgnoringLocalCacheData
+ 							 timeoutInterval: 10
+ 							 ];
     
-    NSError *error = [[NSError alloc] init];
-    NSHTTPURLResponse *responseCode = nil;
-    NSURLConnection * connection = [[NSURLConnection alloc]
-                                    initWithRequest:request
-                                    delegate:self startImmediately:YES];
+    NSURLConnection *connection = [[NSURLConnection alloc]
+ 								   initWithRequest:request
+ 								   delegate:self
+ 								   startImmediately:YES];
+ 	if(!connection) {
+ 		NSLog(@"connection failed");
+        [delegate parser:self didFailWithDownloadError:error];
+ 	} else {
+ 		NSLog(@"connection succeeded");
+ 		
+ 	}
+ 	[delegate parserDidStartParsing:self];
+ 	[connection release];
+    [request release];
     
-    [connection scheduleInRunLoop:[NSRunLoop mainRunLoop]
-                          forMode:NSDefaultRunLoopMode];
-    //NSLog(@"Is%@ main thread", ([NSThread isMainThread] ? @"" : @" NOT"));
-    [connection start];
-    NSData *oResponseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&responseCode error:&error];
-    
-    if([responseCode statusCode] != 200){
-        NSLog(@"Error getting %@, HTTP status code %i", url, [responseCode statusCode]);
-        return nil;
-    }
     NSError * parseError;
     
-    NSString * XMLResponse = [[NSString alloc] initWithData:oResponseData encoding:NSUTF8StringEncoding];
+    NSString * XMLResponse = [[NSString alloc] initWithData:updatePackage encoding:NSUTF8StringEncoding];
     //[connection cancel];
    return [XMLReader dictionaryForXMLString:XMLResponse error:&parseError];
 }
 
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
+    [delegate parserDidStartDownloading:self];
     NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
     if(httpResponse && [httpResponse respondsToSelector:@selector(allHeaderFields)]){
         NSDictionary *httpResponseHeaderFields = [httpResponse allHeaderFields];
@@ -58,15 +62,17 @@
 }
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error{
+    [delegate parser:self didFailWithDownloadError:error];
     NSLog(@"HTTP DownloadError");
 }
 
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data{
     [updatePackage appendData:data];
-    
-    int t = [updatePackage length]/1024;
-    int t2= mFileSize/1024;
-    NSString *output = [NSString stringWithFormat:@"正在下载 進度:%dk/%dk .",t,t2];
+    float t = [data length]/1024;
+    float t2= mFileSize/1024;
+    NSString *output = [NSString stringWithFormat:@"正在下载 進度:%.2fk/%.2fk .",t,t2];
+    [delegate parser:self didMakeProgress:t/t2 ];
+    if (t/t2>=1.0) [delegate parserDidFinishParsing:self];
     NSLog(@"%@",output);
 }
 
