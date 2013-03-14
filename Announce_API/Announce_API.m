@@ -79,6 +79,9 @@
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection {
     [delegate parserDidFinishParsing:self];
+     NSError * parseError;
+    NSString * XMLResponse = [[NSString alloc] initWithData:updatePackage encoding:NSUTF8StringEncoding];
+    content= [XMLReader dictionaryForXMLString:XMLResponse error:&parseError];
 }
 
 -(void)CancelConnection{
