@@ -22,7 +22,7 @@
 
 
 - (void)getAnnounceInfo_Count:(int)count andType:(NSString *)type andPage:(int) page {
-    NSString *url = [NSString stringWithFormat:@"http://dtop.ntou.edu.tw/appAPI.php?page=%d&count=%d&class=%@ ",page,count,type];
+    NSString *url = [NSString stringWithFormat:@"http://dtop.ntou.edu.tw/appAPI.php?page=%d&count=%d&class=%@",page,count,type];
     url = [url stringByAddingPercentEscapesUsingEncoding:CFStringConvertEncodingToNSStringEncoding(NSUTF8StringEncoding)];
     updatePackage = [[NSMutableData alloc] init];
  	NSError * error = nil;
