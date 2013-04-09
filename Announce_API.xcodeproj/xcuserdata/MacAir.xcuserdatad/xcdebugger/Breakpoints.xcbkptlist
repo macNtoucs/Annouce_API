@@ -138,12 +138,25 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Announce_API/Announce_API.m"
-         timestampString = "384965386.364958"
+         timestampString = "385011710.391091"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "89"
-         endingLineNumber = "89"
+         startingLineNumber = "90"
+         endingLineNumber = "90"
          landmarkName = "-connectionDidFinishLoading:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Announce_API/Announce_API.m"
+         timestampString = "385010218.631071"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "26"
+         endingLineNumber = "26"
+         landmarkName = "-getAnnounceInfo_Count:andType:andPage:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

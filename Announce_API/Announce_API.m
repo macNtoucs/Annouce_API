@@ -83,6 +83,7 @@
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection {
      isConnected = false;
+    content = [NSDictionary new];
      NSError * parseError;
     NSString * XMLResponse = [[NSString alloc] initWithData:updatePackage encoding:NSUTF8StringEncoding];
     XMLResponse = [XMLResponse stringByReplacingOccurrencesOfString:@"<br />" withString:@"\n"];
