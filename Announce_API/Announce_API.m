@@ -85,6 +85,7 @@
 
 -(void)fix_content:(NSDictionary*) _content{
     NSLog(@"%d",[[[_content valueForKey:@"ntou"]valueForKey:@"notice" ] count]);
+    if ([[[_content valueForKey:@"ntou"]valueForKey:@"notice" ] count]==0) return;
     if (![[[_content valueForKey:@"ntou"]valueForKey:@"notice" ] isKindOfClass:[NSArray class]]){
         NSArray * content_array = [NSArray arrayWithObject:[[_content valueForKey:@"ntou"]valueForKey:@"notice" ]];
         NSMutableDictionary * mutalbe_content = [NSMutableDictionary dictionaryWithDictionary:_content];
