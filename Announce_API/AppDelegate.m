@@ -29,7 +29,7 @@
     // Print the dictionary
     NSLog(@"%@", xmlDictionary);*/
     Announce_API *api = [[Announce_API alloc]init];
-   [api getAnnounceInfo_Count:6 andType:@"symposium" andPage:2];
+   [api getAnnounceInfo_Count:6 andType:@"Information" andPage:2];
   
     return YES;
 }
